@@ -15,20 +15,16 @@ import javax.validation.constraints.NotNull;
 @Builder
 @Getter
 @Setter
-public class inputRequestDto {
-    @NotNull
+public class InputRequestDto {
     @Max(value = 41,message="Value can't be higher then 41")
     @Min(value = 40, message = "Value can't be lower then 40")
     private double fireLongitude;
 
-    @NotNull
     @Max(value = -73,message="Value can't be higher then -73")
     @Min(value = -75, message = "Value can't be lower then -75")
     private double fireLatitude;
 
-    @NotNull
     @Max(value = 10,message="Value can't be higher then 10")
     @Min(value = 1, message = "Value can't be lower then 1")
     private int numberOfFiretrucks;
-
 }

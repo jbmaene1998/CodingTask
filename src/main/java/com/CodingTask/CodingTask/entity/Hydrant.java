@@ -1,11 +1,11 @@
 package com.CodingTask.CodingTask.entity;
 
-public class hydrant {
+public class Hydrant {
     private String unitId;
     private double longitude;
     private double latitude;
 
-    public hydrant(String unitId, double longitude, double latitude) {
+    public Hydrant(String unitId, double longitude, double latitude) {
         this.unitId = unitId;
         this.longitude = longitude;
         this.latitude = latitude;

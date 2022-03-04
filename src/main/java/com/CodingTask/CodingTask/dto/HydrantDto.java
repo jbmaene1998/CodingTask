@@ -7,7 +7,7 @@ import lombok.*;
 @Builder
 @Getter
 @Setter
-public class hydrantDto {
+public class HydrantDto {
     private String unitId;
     private int meterToFire;
 }

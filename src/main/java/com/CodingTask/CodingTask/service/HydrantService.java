@@ -1,11 +1,13 @@
 package com.CodingTask.CodingTask.service;
 
-import com.CodingTask.CodingTask.dto.inputRequestDto;
-import com.CodingTask.CodingTask.dto.outputResponseDto;
+import com.CodingTask.CodingTask.bmc.HydrantClient;
+import com.CodingTask.CodingTask.dto.InputRequestDto;
+import com.CodingTask.CodingTask.dto.OutputResponseDto;
 import com.CodingTask.CodingTask.helper.Mapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -14,17 +16,24 @@ import org.springframework.stereotype.Service;
 public class HydrantService {
 
     @Autowired
-    private Mapper mapper;
-    @Autowired
-    private com.CodingTask.CodingTask.bmc.hydrantClient hydrantClient;
+    private HydrantClient hydrantClient;
+
+    @Value("${hydrant.select}")
+    private String PARAM_SELECT;
+    @Value("${hydrant.where}")
+    private String PARAM_WHERE;
+    @Value("${hydrant.order}")
+    private String PARAM_ORDER;
+    @Value("${hydrant.limit}")
+    private String PARAM_LIMIT;
 
 
-    public outputResponseDto getHydrants(inputRequestDto dto){
-        return mapper.mapToOutputResponseDto(
+    public OutputResponseDto getHydrants(InputRequestDto dto){
+        return Mapper.mapToOutputResponseDto(
                 hydrantClient.getHydrants(
-                String.format("unitId, ROUND(DISTANCE_IN_METERS(the_geom, 'POINT(%s %s)'), 0) AS meterToFire", dto.getFireLatitude(), dto.getFireLongitude()),
-                String.format("within_circle(the_geom,%s,%s, 25000)", dto.getFireLongitude(), dto.getFireLatitude()),
-                "meterToFire",
-                String.format("%s", dto.getNumberOfFiretrucks())));
+                String.format(PARAM_SELECT, dto.getFireLatitude(), dto.getFireLongitude()),
+                String.format(PARAM_WHERE, dto.getFireLongitude(), dto.getFireLatitude()),
+                PARAM_ORDER,
+                String.format(PARAM_LIMIT, dto.getNumberOfFiretrucks())));
     }
 }

@@ -1,7 +1,7 @@
 package com.CodingTask.CodingTask.controller;
 
-import com.CodingTask.CodingTask.dto.inputRequestDto;
-import com.CodingTask.CodingTask.dto.outputResponseDto;
+import com.CodingTask.CodingTask.dto.InputRequestDto;
+import com.CodingTask.CodingTask.dto.OutputResponseDto;
 import com.CodingTask.CodingTask.service.HydrantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,17 +15,17 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/home")
-public class homeController {
+public class HomeController {
 
 
     @Autowired
     private HydrantService hydrantService;
 
-    public homeController() {
+    public HomeController() {
     }
 
     @GetMapping
-    public ResponseEntity<outputResponseDto> calculate(@Valid @RequestBody inputRequestDto dto){
-            return new ResponseEntity<outputResponseDto>(hydrantService.getHydrants(dto), HttpStatus.OK);
+    public ResponseEntity<OutputResponseDto> calculate(@Valid @RequestBody InputRequestDto dto){
+            return new ResponseEntity<OutputResponseDto>(hydrantService.getHydrants(dto), HttpStatus.OK);
     }
 }

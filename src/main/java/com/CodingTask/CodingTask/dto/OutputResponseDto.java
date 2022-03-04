@@ -11,7 +11,7 @@ import java.util.List;
 @Builder
 @Getter
 @Setter
-public class outputResponseDto {
+public class OutputResponseDto {
     private long totalFirehosesLength;
-    private List<hydrantDto> hydrants;
+    private List<HydrantDto> hydrants;
 }

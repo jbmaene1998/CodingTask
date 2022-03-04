@@ -1,19 +1,17 @@
 package com.CodingTask.CodingTask.helper;
 
-import com.CodingTask.CodingTask.dto.hydrantDto;
-import com.CodingTask.CodingTask.dto.outputResponseDto;
-import org.springframework.stereotype.Component;
+import com.CodingTask.CodingTask.dto.HydrantDto;
+import com.CodingTask.CodingTask.dto.OutputResponseDto;
 
 import java.util.List;
 
-@Component
 public class Mapper {
-    public outputResponseDto mapToOutputResponseDto(List<hydrantDto> hydrants){
-        return outputResponseDto.builder()
+    public static OutputResponseDto mapToOutputResponseDto(List<HydrantDto> hydrants){
+        return OutputResponseDto.builder()
                 .hydrants(hydrants)
                 .totalFirehosesLength(hydrants
                         .stream()
-                        .mapToLong(hydrantDto::getMeterToFire)
+                        .mapToLong(HydrantDto::getMeterToFire)
                         .sum())
                 .build();
     }
